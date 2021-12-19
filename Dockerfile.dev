@@ -1,0 +1,15 @@
+FROM node:16-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
+
+# start with docker run -it -p 3000:3000 IMAGE_ID
+# volume with docker run -it -p 3000:3000 -v /app/node_modules -v ${pwd}:/app IMAGE_ID
+# everytime docker tries to reach out to /node-modules it's redirected to the local folder on the machine
+# docker run -it IMAGE_ID npm run test overrides CMD with custom command
